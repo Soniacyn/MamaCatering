@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food">
+        <item>Nasi Ayam</item>
+        <item>Nasi Uduk</item>
+        <item>Nasi Goreng</item>
+        <item>Pangsit</item>
+    </string-array>
+
+    <string-array name="food_desc">
+        <item>Menu yang terdiri dari nasi dengan ayam yang lezat</item>
+        <item>Menu yang terdiri dari nasi uduk dan juga taburan ayam dan telur</item>
+        <item>Menu yang terdiri dari nasi goreng dengan ayam, sosi dan telur</item>
+        <item>Menu yang terdiri dari pangsit dengan bakso dan juga pangsit ayam yang lezat</item>
+    </string-array>
+
+    <string-array name="food_price">
+        <item>Rp. 8000</item>
+        <item>Rp. 8000</item>
+        <item>Rp. 7000</item>
+        <item>Rp. 8000</item>
+    </string-array>
+
+    <array name="places_picture">
+        <item>@drawable/a</item>
+        <item>@drawable/b</item>
+        <item>@drawable/c</item>
+        <item>@drawable/d</item>
+    </array>
+</resources>
