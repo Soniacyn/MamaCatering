@@ -1,16 +1,21 @@
 package id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model;
 
 
-import android.graphics.drawable.Drawable;
+import java.io.Serializable;
 
-public class Food {
+public class Food implements Serializable {
     public String judul;
     public String deskripsi;
-    public Drawable foto;
+    public String detail;
+    public String price;
+    public String foto;
 
-    public Food(String judul, String deskripsi, Drawable foto) {
+
+    public Food(String judul, String deskripsi, String detail, String price, String foto) {
         this.judul = judul;
         this.deskripsi = deskripsi;
+        this.detail = detail;
+        this.price = price;
         this.foto = foto;
     }
 }

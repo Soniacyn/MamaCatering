@@ -1,5 +1,7 @@
 package id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.adapter;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +16,13 @@ import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
-    ArrayList<Food> hotelList;
+    IFoodAdapter mIFoodAdapter;
 
-    public FoodAdapter(ArrayList<Food> hotelList) {
+    ArrayList<Food> foodList;
 
-        this.hotelList = hotelList;
+    public FoodAdapter(Context context, ArrayList<Food> foodList) {
+        this.foodList = foodList;
+        mIFoodAdapter = (IFoodAdapter) context;
     }
 
     @Override
@@ -30,17 +34,22 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Food hotel = hotelList.get(position);
-        holder.tvJudul.setText(hotel.judul);
-        holder.tvDeskripsi.setText(hotel.deskripsi);
-        holder.ivFoto.setImageDrawable(hotel.foto);
+        Food food = foodList.get(position);
+        holder.tvJudul.setText(food.judul);
+        holder.tvDeskripsi.setText(food.deskripsi);
+        holder.ivFoto.setImageURI(Uri.parse(food.foto));
     }
 
     @Override
     public int getItemCount() {
-        if (hotelList != null)
-            return hotelList.size();
+        if (foodList != null)
+            return foodList.size();
         return 0;
+
+    }
+
+    public interface IFoodAdapter {
+        void doClick(int pos);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -53,6 +62,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             ivFoto = (ImageView) itemView.findViewById(R.id.imageView);
             tvJudul = (TextView) itemView.findViewById(R.id.textViewJudul);
             tvDeskripsi = (TextView) itemView.findViewById(R.id.textViewDeskripsi);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mIFoodAdapter.doClick(getAdapterPosition());
+                }
+            });
         }
     }
 }
