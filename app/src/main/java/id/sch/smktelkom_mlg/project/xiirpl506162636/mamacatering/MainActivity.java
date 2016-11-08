@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +21,7 @@ import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 
 public class MainActivity extends AppCompatActivity implements FoodAdapter.IFoodAdapter {
 
+    public static final int REQUEST_CODE_ADD = 88;
     public static String FOOD;
     ArrayList<Food> mList = new ArrayList<>();
     FoodAdapter mAdapter;
@@ -46,10 +46,13 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                goAdd();
             }
         });
+    }
+
+    private void goAdd() {
+        startActivityForResult(new Intent(this, InputActivity.class), REQUEST_CODE_ADD);
     }
 
     private void fillData() {
@@ -100,9 +103,21 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) {
+            Food food = (Food) data.getSerializableExtra(FOOD);
+            mList.add(food);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public void doClick(int pos) {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(FOOD, mList.get(pos));
         startActivity(intent);
     }
-}
+    }
+
+
