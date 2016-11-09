@@ -16,10 +16,7 @@ import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 public class InputActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_GET = 1;
-    EditText etJudul;
-    EditText etDeskripsi;
-    EditText etDetail;
-    EditText etPrice;
+    EditText etJudul, etDeskripsi, etDetail, etPrice;
     ImageView ivFoto;
     Uri uriFoto;
     Food food;
@@ -42,13 +39,31 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.buttonSimpan).setOnClickListener(
+        findViewById(R.id.buttonSimpan).setOnClickListener
+                (
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         doSave();
                     }
                 });
+
+        food = (Food) getIntent().getSerializableExtra(MainActivity.FOOD);
+        if (food != null) {
+            setTitle("Edit " + food.judul);
+            fillData();
+        } else {
+            setTitle("New Food");
+        }
+    }
+
+    private void fillData() {
+        etJudul.setText(food.judul);
+        etDeskripsi.setText(food.deskripsi);
+        etDetail.setText(food.detail);
+        etPrice.setText(food.price);
+        uriFoto = Uri.parse(food.foto);
+        ivFoto.setImageURI(uriFoto);
     }
 
     private void doSave() {

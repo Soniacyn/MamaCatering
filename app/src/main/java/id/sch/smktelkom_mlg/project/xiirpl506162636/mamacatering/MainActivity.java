@@ -22,9 +22,11 @@ import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 public class MainActivity extends AppCompatActivity implements FoodAdapter.IFoodAdapter {
 
     public static final int REQUEST_CODE_ADD = 88;
+    public static final int REQUEST_CODE_EDIT = 99;
     public static String FOOD;
     ArrayList<Food> mList = new ArrayList<>();
     FoodAdapter mAdapter;
+    int itemPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +111,13 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
             Food food = (Food) data.getSerializableExtra(FOOD);
             mList.add(food);
             mAdapter.notifyDataSetChanged();
+        } else if (requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) {
+            Food food = (Food) data.getSerializableExtra(FOOD);
+            mList.remove(itemPos);
+            mList.add(itemPos, food);
+            mAdapter.notifyDataSetChanged();
         }
+
     }
 
     @Override
@@ -118,6 +126,29 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
         intent.putExtra(FOOD, mList.get(pos));
         startActivity(intent);
     }
+
+    @Override
+    public void doEdit(int pos) {
+        itemPos = pos;
+        Intent intent = new Intent(this, InputActivity.class);
+        intent.putExtra(FOOD, mList.get(pos));
+        startActivityForResult(intent, REQUEST_CODE_EDIT);
     }
+
+    @Override
+    public void doDelete(int pos) {
+
+    }
+
+    @Override
+    public void doFav(int pos) {
+
+    }
+
+    @Override
+    public void doShare(int pos) {
+
+    }
+}
 
 
