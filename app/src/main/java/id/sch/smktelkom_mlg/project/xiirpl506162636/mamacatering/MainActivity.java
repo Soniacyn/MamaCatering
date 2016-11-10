@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
             Food food = (Food) data.getSerializableExtra(FOOD);
             mList.add(food);
             mAdapter.notifyDataSetChanged();
-        } else if (requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) {
+        } else if (requestCode == REQUEST_CODE_EDIT && resultCode == RESULT_OK) {
             Food food = (Food) data.getSerializableExtra(FOOD);
             mList.remove(itemPos);
             mList.add(itemPos, food);
