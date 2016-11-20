@@ -12,7 +12,8 @@
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="56dp">
+        android:paddingTop="56dp"
+        android:background="#4766ee">
 
         <ImageView
             android:layout_width="150dp"
@@ -65,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text="Belum punya Akun? Regristaris sekarang!"
+            android:text="Belum punya Akun? Regristrasi sekarang!"
             android:textSize="16dip" />
 
     </LinearLayout>

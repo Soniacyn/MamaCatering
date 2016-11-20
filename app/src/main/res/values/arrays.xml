@@ -72,5 +72,4 @@
         <item>@drawable/c</item>
         <item>@drawable/d</item>
     </array>
-    <color name="colorBackground">#147fbb</color>
 </resources>
