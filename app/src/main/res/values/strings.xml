@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MamaCatering</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logout" />
     <string name="title_activity_detail">DetailActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -101,4 +101,5 @@
         <string name="welcome">Welcome</string>
         <string name="btn_logout">LOGOUT</string>
         <string name="name">Fullname</string>
+
 </resources>

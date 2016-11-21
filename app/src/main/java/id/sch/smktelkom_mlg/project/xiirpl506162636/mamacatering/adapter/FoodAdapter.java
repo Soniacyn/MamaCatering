@@ -61,9 +61,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         void doFav(int pos);
 
         void doShare(int pos);
-
-
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
