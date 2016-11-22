@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MamaCatering</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logout" />
     <string name="title_activity_detail">DetailActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -91,9 +91,6 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-
-
-
         <string name="hint_email">Email</string>
         <string name="hint_password">Password</string>
         <string name="hint_name">Fullname</string>
