@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.DetailActivity;
+import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.MainActivity;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.R;
 
 public class LoginActivity extends Activity {
@@ -47,12 +47,14 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        requestQueue = Volley.newRequestQueue(this);
+
         inputUsername = (EditText) findViewById(R.id.username);
         inputPassword = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
 
-        requestQueue = Volley.newRequestQueue(this);
+
 
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
                                                  @Override
@@ -72,10 +74,11 @@ public class LoginActivity extends Activity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.names().get(0).equals("success")) {
-                                Toast.makeText(getApplicationContext(), "SUCCESS" + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivity.this, DetailActivity.class));
+                                Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             } else {
-                                Toast.makeText(getApplicationContext(), "ERROR" + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "ERROR " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();

@@ -19,6 +19,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.activity.LoginActivity;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.adapter.FoodAdapter;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 
@@ -146,7 +147,8 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            return true;
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

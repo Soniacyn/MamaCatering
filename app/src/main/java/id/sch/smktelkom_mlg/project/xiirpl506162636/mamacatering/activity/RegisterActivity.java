@@ -26,7 +26,7 @@ import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.R;
 
 public class RegisterActivity extends Activity {
     private static final String URL = "https://tugasandroid.000webhostapp.com/user_regis.php";
-    private Button btnRegis, btnLogin;
+    private Button btnRegis, btnToLogin;
     private EditText inputUsername, inputPassword, inputnotelp;
     private RequestQueue requestQueue;
     private StringRequest request;
@@ -36,13 +36,15 @@ public class RegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        requestQueue = Volley.newRequestQueue(this);
+
         inputUsername = (EditText) findViewById(R.id.username);
         inputPassword = (EditText) findViewById(R.id.password);
         inputnotelp = (EditText) findViewById(R.id.nohp);
         btnRegis = (Button) findViewById(R.id.btnRegis);
-        btnLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        btnToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
-        requestQueue = Volley.newRequestQueue(this);
+
 
         btnRegis.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +83,7 @@ public class RegisterActivity extends Activity {
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
