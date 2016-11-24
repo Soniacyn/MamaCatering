@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +22,7 @@ import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.activity.LoginA
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.adapter.FoodAdapter;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 
-public abstract class MainActivity extends AppCompatActivity implements FoodAdapter.IFoodAdapter {
+public abstract class MainActivity_user extends AppCompatActivity implements FoodAdapter.IFoodAdapter {
 
     public static final int REQUEST_CODE_ADD = 88;
     public static final int REQUEST_CODE_EDIT = 99;
@@ -181,32 +180,6 @@ public abstract class MainActivity extends AppCompatActivity implements FoodAdap
         startActivity(intent);
     }
 
-    @Override
-    public void doEdit(int pos) {
-        itemPos = pos;
-        Intent intent = new Intent(this, InputActivity.class);
-        intent.putExtra(FOOD, mList.get(pos));
-        startActivityForResult(intent, REQUEST_CODE_EDIT);
-    }
-
-    @Override
-    public void doDelete(int pos) {
-        itemPos = pos;
-        final Food food = mList.get(pos);
-        mList.remove(itemPos);
-        if (isFiltered) mListAll.remove(mListMapFilter.get(itemPos).intValue());
-        mAdapter.notifyDataSetChanged();
-        Snackbar.make(findViewById(R.id.fab), food.judul + " Terhapus", Snackbar.LENGTH_LONG)
-                .setAction("UNDO", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mList.add(itemPos, food);
-                        if (isFiltered) mListAll.add(mListMapFilter.get(itemPos), food);
-                        mAdapter.notifyDataSetChanged();
-                    }
-                })
-                .show();
-    }
 }
 
 

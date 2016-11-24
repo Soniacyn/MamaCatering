@@ -91,15 +91,15 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-        <string name="hint_email">Email</string>
-        <string name="hint_password">Password</string>
-        <string name="hint_name">Fullname</string>
-        <string name="btn_login">LOGIN</string>
-        <string name="btn_register">REGISTER</string>
-        <string name="btn_link_to_register">Not a member? Sign up now.</string>
-        <string name="btn_link_to_login">Already registred! Login Me.</string>
-        <string name="welcome">Welcome</string>
-        <string name="btn_logout">LOGOUT</string>
-        <string name="name">Fullname</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_link_to_register">Not a member? Sign up now.</string>
+    <string name="btn_link_to_login">Already registred! Login Me.</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">LOGOUT</string>
+    <string name="name">Fullname</string>
 
 </resources>
