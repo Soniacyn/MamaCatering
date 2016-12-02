@@ -6,14 +6,18 @@ package id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.activity.LoginActivity;
 
 public class splash_screen extends Activity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);

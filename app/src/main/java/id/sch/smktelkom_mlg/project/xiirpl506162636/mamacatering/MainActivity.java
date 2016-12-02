@@ -24,6 +24,15 @@ import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.adapter.FoodAda
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 
 public class MainActivity extends AppCompatActivity implements FoodAdapter.IFoodAdapter {
+    public boolean isFirstStart;
+
+
+
+
+
+
+
+
 
     public static final int REQUEST_CODE_ADD = 88;
     public static final int REQUEST_CODE_EDIT = 99;
