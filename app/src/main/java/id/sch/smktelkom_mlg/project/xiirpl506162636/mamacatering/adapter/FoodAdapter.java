@@ -79,8 +79,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             tvDeskripsi = (TextView) itemView.findViewById(R.id.textViewDeskripsi);
             bEdit = (Button) itemView.findViewById(R.id.buttonEdit);
             bDelete = (Button) itemView.findViewById(R.id.buttonDelete);
-            ibFav = (ImageButton) itemView.findViewById(R.id.buttonFavorite);
-            ibShare = (ImageButton) itemView.findViewById(R.id.buttonShare);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -97,18 +95,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     mIFoodAdapter.doDelete(getAdapterPosition());
-                }
-            });
-            ibFav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mIFoodAdapter.doFav(getAdapterPosition());
-                }
-            });
-            ibShare.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mIFoodAdapter.doShare(getAdapterPosition());
                 }
             });
         }
