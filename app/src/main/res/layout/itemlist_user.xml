@@ -43,7 +43,7 @@
             tools:text="Deskripsi" />
 
         <Button
-            android:id="@+id/buttonShare"
+            android:id="@+id/buttonPesan"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

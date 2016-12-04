@@ -28,10 +28,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.MainActivity;
+import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.MainActivity_user;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.R;
 
 public class LoginActivity extends Activity {
-    private static final String URL = "https://tugasandroid.000webhostapp.com/user_control.php";
+    public static final String ROLE = "ROLE";
+    private static final String URL = "http://tugasandroid.000webhostapp.com/user_control.php";
     private Button btnLogin, btnLinkToRegister;
     private EditText inputUsername, inputPassword;
     private RequestQueue requestQueue;
@@ -68,15 +70,24 @@ public class LoginActivity extends Activity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!inputUsername.equals("") && !inputPassword.equals("")){
                 request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.names().get(0).equals("success")) {
-                                Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success") + jsonObject.getString("role"), Toast.LENGTH_SHORT).show();
                                 finish();
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                if(jsonObject.getString("role").equals("admin")){
+                                    Intent intn = new Intent(LoginActivity.this, MainActivity.class);
+                                    intn.putExtra(ROLE,jsonObject.getString("role"));
+                                    startActivity(intn);
+                                }else{
+                                    Intent intn = new Intent(LoginActivity.this, MainActivity_user.class);
+                                    intn.putExtra(ROLE,jsonObject.getString("role"));
+                                    startActivity(intn);
+                                }
                             } else {
                                 Toast.makeText(getApplicationContext(), "ERROR " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
@@ -100,7 +111,7 @@ public class LoginActivity extends Activity {
                     }
                 };
                 requestQueue.add(request);
-            }
+            }}
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
