@@ -32,6 +32,7 @@ public class MainActivity_user extends AppCompatActivity implements FoodAdapter_
     ArrayList<Food> mList = new ArrayList<>();
     FoodAdapter_user mAdapter;
     int itemPos;
+
     String role;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class MainActivity_user extends AppCompatActivity implements FoodAdapter_
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
     }
 
     private void goAdd() {

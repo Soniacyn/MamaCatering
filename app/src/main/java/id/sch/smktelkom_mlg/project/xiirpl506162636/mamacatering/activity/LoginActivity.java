@@ -30,16 +30,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.MainActivity;
+import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.MainActivity_user;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.MyIntro;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.R;
 
 public class LoginActivity extends Activity {
-    private static final String URL = "https://tugasandroid.000webhostapp.com/user_control.php";
+    public static final String ROLE = "ROLE";
+    private static final String URL = "http://tugasandroid.000webhostapp.com/user_control.php";
+    public boolean isFirstStart;
     private Button btnLogin, btnLinkToRegister;
     private EditText inputUsername, inputPassword;
     private RequestQueue requestQueue;
     private StringRequest request;
-    public boolean isFirstStart;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -48,8 +50,6 @@ public class LoginActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-
 
 
         Thread t = new Thread(new Runnable() {
@@ -93,8 +93,6 @@ public class LoginActivity extends Activity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
 
-
-
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
                                                  @Override
                                                  public void onClick(View v) {
@@ -103,43 +101,52 @@ public class LoginActivity extends Activity {
                                              }
         );
 
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject.names().get(0).equals("success")) {
-                                Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            } else {
-                                Toast.makeText(getApplicationContext(), "ERROR " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                if(!inputUsername.equals("") && !inputPassword.equals("")){
+                    request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (jsonObject.names().get(0).equals("success")) {
+                                    Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success") + jsonObject.getString("role"), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    if(jsonObject.getString("role").equals("admin")){
+                                        Intent intn = new Intent(LoginActivity.this, MainActivity_user.class);
+                                        intn.putExtra(ROLE,jsonObject.getString("role"));
+                                        startActivity(intn);
+                                    }
+                                    else{
+                                        Intent intn = new Intent(LoginActivity.this, MainActivity.class);
+                                        intn.putExtra(ROLE,jsonObject.getString("role"));
+                                        startActivity(intn);
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "ERROR " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
                         }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        HashMap<String, String> hashMap = new HashMap<String, String>();
-                        hashMap.put("username", inputUsername.getText().toString());
-                        hashMap.put("password", inputPassword.getText().toString());
-                        return hashMap;
-                    }
-                };
-                requestQueue.add(request);
-            }
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            HashMap<String, String> hashMap = new HashMap<String, String>();
+                            hashMap.put("username", inputUsername.getText().toString());
+                            hashMap.put("password", inputPassword.getText().toString());
+                            return hashMap;
+                        }
+                    };
+                    requestQueue.add(request);
+                }}
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -181,4 +188,5 @@ public class LoginActivity extends Activity {
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
+
 }

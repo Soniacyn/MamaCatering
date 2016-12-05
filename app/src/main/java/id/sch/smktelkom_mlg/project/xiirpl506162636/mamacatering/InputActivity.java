@@ -41,12 +41,12 @@ public class InputActivity extends AppCompatActivity {
 
         findViewById(R.id.buttonSimpan).setOnClickListener
                 (
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        doSave();
-                    }
-                });
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                doSave();
+                            }
+                        });
 
         food = (Food) getIntent().getSerializableExtra(MainActivity.FOOD);
         if (food != null) {

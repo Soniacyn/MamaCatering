@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
     public static final int REQUEST_CODE_ADD = 88;
     public static final int REQUEST_CODE_EDIT = 99;
     public static String FOOD;
+    public boolean isFirstStart;
     ArrayList<Food> mListAll = new ArrayList<>();
     boolean isFiltered;
     ArrayList<Integer> mListMapFilter = new ArrayList<>();
@@ -40,10 +41,12 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         role = getIntent().getStringExtra(LoginActivity.ROLE);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
         mAdapter = new FoodAdapter(this, mList);
         recyclerView.setAdapter(mAdapter);
 
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.IFood
             }
         });
     }
+
 
     private void goAdd() {
         startActivityForResult(new Intent(this, InputActivity.class), REQUEST_CODE_ADD);

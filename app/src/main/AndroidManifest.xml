@@ -3,7 +3,7 @@
     package="id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +11,7 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-    >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name"
@@ -24,8 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MyIntro" />
-
-        <activity android:name=".splash_screen" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".InputActivity" />
