@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,15 +13,14 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import java.util.ArrayList;
 
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.activity.LoginActivity;
-import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.adapter.FoodAdapter;
+import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.adapter.FoodAdapter_user;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 
-public abstract class MainActivity_user extends AppCompatActivity implements FoodAdapter.IFoodAdapter {
+public class MainActivity_user extends AppCompatActivity implements FoodAdapter_user.IFoodAdapter {
 
     public static final int REQUEST_CODE_ADD = 88;
     public static final int REQUEST_CODE_EDIT = 99;
@@ -32,18 +30,19 @@ public abstract class MainActivity_user extends AppCompatActivity implements Foo
     ArrayList<Integer> mListMapFilter = new ArrayList<>();
     String mQuery;
     ArrayList<Food> mList = new ArrayList<>();
-    FoodAdapter mAdapter;
+    FoodAdapter_user mAdapter;
     int itemPos;
 
+    String role;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_main_activity_user);
+        role = getIntent().getStringExtra(LoginActivity.ROLE);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new FoodAdapter(this, mList);
+        mAdapter = new FoodAdapter_user(this, mList);
         recyclerView.setAdapter(mAdapter);
 
         fillData();
@@ -51,13 +50,6 @@ public abstract class MainActivity_user extends AppCompatActivity implements Foo
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goAdd();
-            }
-        });
     }
 
     private void goAdd() {

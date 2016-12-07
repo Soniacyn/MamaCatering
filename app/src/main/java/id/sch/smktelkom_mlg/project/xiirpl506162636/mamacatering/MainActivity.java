@@ -23,11 +23,12 @@ import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.activity.LoginA
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.adapter.FoodAdapter;
 import id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering.model.Food;
 
-public abstract class MainActivity extends AppCompatActivity implements FoodAdapter.IFoodAdapter {
+public class MainActivity extends AppCompatActivity implements FoodAdapter.IFoodAdapter {
 
     public static final int REQUEST_CODE_ADD = 88;
     public static final int REQUEST_CODE_EDIT = 99;
     public static String FOOD;
+    public boolean isFirstStart;
     ArrayList<Food> mListAll = new ArrayList<>();
     boolean isFiltered;
     ArrayList<Integer> mListMapFilter = new ArrayList<>();
@@ -35,15 +36,17 @@ public abstract class MainActivity extends AppCompatActivity implements FoodAdap
     ArrayList<Food> mList = new ArrayList<>();
     FoodAdapter mAdapter;
     int itemPos;
-
+    String role;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        role = getIntent().getStringExtra(LoginActivity.ROLE);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
         mAdapter = new FoodAdapter(this, mList);
         recyclerView.setAdapter(mAdapter);
 
@@ -60,6 +63,7 @@ public abstract class MainActivity extends AppCompatActivity implements FoodAdap
             }
         });
     }
+
 
     private void goAdd() {
         startActivityForResult(new Intent(this, InputActivity.class), REQUEST_CODE_ADD);
@@ -207,6 +211,18 @@ public abstract class MainActivity extends AppCompatActivity implements FoodAdap
                 })
                 .show();
     }
+
+    @Override
+    public void doFav(int pos) {
+
+    }
+
+    @Override
+    public void doShare(int pos) {
+
+    }
+
+
 }
 
 
