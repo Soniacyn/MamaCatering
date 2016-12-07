@@ -1,14 +1,21 @@
 package id.sch.smktelkom_mlg.project.xiirpl506162636.mamacatering;
+
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,12 +31,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class pesan extends ActionBarActivity {
 
-    String myJSON;
-    private Button Update;
     private static final String URL = "https://tugasandroid.000webhostapp.com/update.php";
     private static final String TAG_RESULTS="result";
     private static final String TAG_ID = "id_pesan";
@@ -38,14 +44,18 @@ public class pesan extends ActionBarActivity {
     private static final String TAG_Catatan ="catatan";
     private static final String TAG_Proses ="proses";
     private static final String TAG_No_telp ="no_telp";
-
-
-
+    String myJSON;
+    EditText etTambahan;
+    TextView tvNama, tvPesan, tvHarga;
+    Button buttonKirim;
+    RequestQueue requestQueue;
+    String insertUrl = "";
+    String showUrl = "";
     JSONArray peoples = null;
-
     ArrayList<HashMap<String, String>> personList;
-
     ListView list;
+    private Button Update;
+    private JSONObject response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +66,34 @@ public class pesan extends ActionBarActivity {
         list = (ListView) findViewById(R.id.listView);
         personList = new ArrayList<HashMap<String,String>>();
         getData();
+
+        etTambahan = (EditText) findViewById(R.id.editTextTambahan);
+
+        buttonKirim = (Button) findViewById(R.id.buttonKirim);
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        buttonKirim.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+
+                JSONObject jsonObject = new JSONObject((Map) response);
+                try {
+                    if (jsonObject.names().get(0).equals("success")) {
+                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success") + jsonObject.getString("role"), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+
+
+
 
 
     protected void showList(){

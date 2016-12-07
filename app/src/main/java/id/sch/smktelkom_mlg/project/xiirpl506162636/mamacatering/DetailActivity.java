@@ -39,6 +39,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvPrice = (TextView) findViewById(R.id.food_price);
         tvPrice.setText(food.price);
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,4 +49,5 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
+
 }
