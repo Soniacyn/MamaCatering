@@ -113,13 +113,13 @@ public class LoginActivity extends Activity {
                                 if (jsonObject.names().get(0).equals("success")) {
                                     Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success") + jsonObject.getString("role"), Toast.LENGTH_SHORT).show();
                                     finish();
-                                    if(jsonObject.getString("role").equals("admin")){
-                                        Intent intn = new Intent(LoginActivity.this, MainActivity_user.class);
+                                    if (jsonObject.getString("role").equals("You are admin")) {
+                                        Intent intn = new Intent(LoginActivity.this, MainActivity.class);
                                         intn.putExtra(ROLE,jsonObject.getString("role"));
                                         startActivity(intn);
                                     }
                                     else{
-                                        Intent intn = new Intent(LoginActivity.this, MainActivity.class);
+                                        Intent intn = new Intent(LoginActivity.this, MainActivity_user.class);
                                         intn.putExtra(ROLE,jsonObject.getString("role"));
                                         startActivity(intn);
                                     }
